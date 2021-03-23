@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{current_group.org_name}}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/groupInfo.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            
+            <a href="/groups">Dashboard</a>
+            <a class="logout" href="/logout">Logout</a>
+        </div>
+        <div class="groupInfoJoin">
+            <h2>{{current_group.org_name}}</h2>
+            <p class="description"><strong>Description:</strong> {{current_group.description}}</p>
+            {%if current_user not in current_group.members.all%}
+            <form action="/joinGroup/{{current_group.id}}" method="POST">
+                {%csrf_token%}
+                <input type="submit" class="btn btn-success" value="Join Group">
+            </form>
+            {%else%}
+            <form action="/leaveGroup/{{current_group.id}}" method="POST">
+                {%csrf_token%}
+                <input type="submit" class="btn btn-danger" value="Leave Group">
+            </form>
+            {%endif%}
+            
+        </div>
+        <div class="membersCreators">
+            <h2>Created By: {{current_group.created_user.first_name}} {{current_group.created_user.last_name}}</h2>
+            <p>Members:</p>
+            {%for members in current_group.members.all%}
+            <p class="members">{{members.first_name}} {{members.last_name}}</p>
+            {%endfor%}
+        
+        </div>
+    </div>
+
+
+</body>
+</html>

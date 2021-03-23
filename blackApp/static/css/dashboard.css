@@ -1,0 +1,29 @@
+*{
+    padding:0px;
+    margin:0px auto;
+    
+}
+.container{
+    height:1000px;
+    
+} 
+.header{
+    border-bottom:black 2px solid;
+}
+.header1{
+    display:inline-block;
+}
+.header2{
+    display:inline-block;
+    margin-left:700px;
+}
+.listOrg{
+    display:inline-block;
+    height:400px;
+    width:200px;
+}
+.orgForm{
+    display:inline-block;
+    height:300px;
+    margin:20px;
+}

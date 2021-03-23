@@ -1,0 +1,19 @@
+*{
+    padding:0px;
+    margin:0px auto;
+    
+}
+.container{
+    height:1000px;
+    background-color:grey; 
+}
+.registartion_page{
+    display:inline-block;
+    margin-left:130px;
+}
+
+.login_page{
+    display:inline-block;
+    vertical-align: top;
+    margin-left:300px;
+}

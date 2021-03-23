@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login or Register</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/firstPage.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+       
+</head>
+<body>
+    <div class="container">
+        {% if messages %}
+        <ul class="messages">    
+            {% for message in messages %}    
+                <li>{{ message }}</li>    
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <div class="registartion_page">
+            <h1>Register</h1>
+            <form action="/registration_process" method="POST">
+                {%csrf_token%}
+                <label for=first_name">First Name</label><br>
+                <input type="text" name ="first_name"><br>
+                <label for=last_name">Last Name</label><br>
+                <input type="text" name ="last_name"><br>
+                <label for=email">Email</label><br>
+                <input type="text" name ="email"><br>
+                <label for = "password">Password</label><br>
+                <input type="password" name="password"><br>
+                <label for = "password_cf">Confirm Password</label><br>
+                <input type="password" name="password_cf"><br>
+                <input type='submit' class="btn btn-primary" value = "Register">
+            </form>
+        </div>
+        <div class="login_page">
+            <h1>Login</h1>
+            <form action="/login_process" method = "POST">
+                {%csrf_token%}
+                <label for="email">Email</label><br>
+                <input type="text" name="email"><br>
+                <label for="Password">Password</label><br>
+                <input type="password" name="password"><br>
+                <input type="submit" class="btn btn-success" value="Log In">
+            </form>
+        </div>
+    </div>
+</body>
+</html>

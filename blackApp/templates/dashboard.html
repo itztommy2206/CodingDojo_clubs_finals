@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{current_user.first_name}} {{current_user.last_name}}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2 class="header1">Hi {{current_user.first_name}} {{current_user.last_name}}!</h2>
+            <a class="header2" href="/logout">Logout</a>
+        </div>
+        {% if messages %}
+        <ul class="messages">    
+            {% for message in messages %}    
+                <li>{{ message }}</li>    
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <div clas="listOrg">
+            <h4>Here are the organizations you may join:</h4>
+            {%for orgs in all_groups%}
+            <p>
+                <a href="/groups/{{orgs.id}}">{{orgs.org_name}}</a>
+                {%if current_user.id == orgs.created_user.id%}
+                <form action="/deleteGroup/{{orgs.id}}" method="POST">
+                    {%csrf_token%}
+                    <input type="submit" value="Delete {{orgs.org_name}}">
+                </form>
+                {%endif%}
+            </p>
+            <ul>
+                <li><strong>Description:</strong> {{orgs.description}}</li>
+                <li><strong>Memebers:</strong> {{orgs.members.count}}</li>
+            </ul>
+            {%endfor%}
+           
+        </div>
+        <div class=border">
+            <div class="orgForm">
+                <h3>Create a new Organization:</h3>
+                <form action ="/create_org" method ="POST">
+                    {%csrf_token%}
+                    <label for="org_name">Org Name:</label><br>
+                    <input type="text" name="org_name"><br>
+                    <label for="description">Description:</label><br>
+                    <textarea name="description" cols="40" rows="4"></textarea><br>
+                    <input type="submit" class="btn btn-info" value="Create">
+                </form>
+            </div>
+        </div>
+        
+    </div>
+
+</body>
+</html>

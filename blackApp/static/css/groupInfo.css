@@ -1,0 +1,22 @@
+*{
+    padding:0px;
+    margin:0px auto;
+    
+}
+.container{
+    height:1000px;
+    background-color:grey;
+}
+.header{
+    border-bottom:2px black solid;
+} 
+
+.description{
+    text-indent:30px;
+}
+.members{
+    text-indent:30px;
+}
+.logout{
+    margin-left:900px;
+}
